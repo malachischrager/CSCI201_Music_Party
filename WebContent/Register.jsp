@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Register Music Party</title>		
-		<link rel="stylesheet" type="text/css" href="test.css">
+		<link rel="stylesheet" type="text/css" href="Register.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 	</head>
 	<body>

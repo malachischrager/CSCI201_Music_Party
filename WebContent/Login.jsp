@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>Log In Music Party</title>		
-		<link rel="stylesheet" type="text/css" href="test.css">
+		<link rel="stylesheet" type="text/css" href="Login.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
 	</head>
 	<body>
@@ -13,7 +13,7 @@
 		<div id="error_msg"></div>
 		<div id="page">
           	
-          	<form onsubmit="return validate();" name="login" method="POST" class="container" id="join-room">
+          	<form action="" onsubmit="return validate();" name="login" method="POST" class="container" id="join-room">
           	
           		<div class="row justify-content-center form-input">
           			<input type="text" name="user" class="form-control col-4" placeholder="Username">
