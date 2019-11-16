@@ -79,7 +79,7 @@ public class Verify extends HttpServlet {
 		ResultSet rs = null;
 		boolean output = false;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty&socke tFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty1&password=musicparty");
+			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty&password=musicparty");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE username ='"+ username +"'");
 			if(!(rs.next())) {
@@ -111,7 +111,7 @@ public class Verify extends HttpServlet {
 		Connection conn = null;
 		Statement st = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty&socke tFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty1&password=musicparty");
+			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty&password=musicparty");
 			st = conn.createStatement();
 			st.executeUpdate("INSERT into users(username, password) values ('"+ username +"','"+ password +"')");
 		} catch (SQLException sqle) {
@@ -135,7 +135,7 @@ public class Verify extends HttpServlet {
 		ResultSet rs = null;
 		boolean correctInfo = false;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty&socke tFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty1&password=musicparty");
+			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty&password=musicparty");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT password FROM users WHERE username ='"+ username +"'");
 			rs.next();

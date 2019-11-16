@@ -8,15 +8,15 @@
 	<body>
 		
 		<div id="header">
-			<h1>Music Party<h1>
+			<h1>Music Party</h1>
 		</div>
 		<div id="page">
 		
 			<div class="row justify-content-center" id="login">
-          		<button type="submit" class="btn btn-dark"> Login</button>
+          		<button onclick="window.location.href = 'Login.jsp';" type="submit" class="btn btn-dark"> Login</button>
           	</div>
           	<div = class="row justify-content-center" id="register">
-          		<button type="submit" class="btn btn-dark"> Register</button>
+          		<button onclick="window.location.href = 'Register.jsp';" type="submit" class="btn btn-dark"> Register</button>
           	</div>
           	
           	<form action="HomeServlet" method="GET" class="row justify-content-center" id="join-room">
