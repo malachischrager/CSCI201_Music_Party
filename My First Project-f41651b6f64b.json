@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "starry-hearth-259220",
+  "private_key_id": "f41651b6f64baa94f3fbd78a2f95143b3d483bc6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCaepMbM5yUNb4Q\nIOJKNwlHvzF7i5eeCVREbg+Nvt+DwpwBkzFIcS7xDdn/BjUTE6j0Fk1QYLTbYqF+\nbUdVeK4hmrmbB/eurpmSK+on/AWe4iiMHuoWdy5dirBjVU292nY9HATASMriTl2Q\n/GHIyxj2BidIVSF906SngNBwylqFb3tFO2vrfh1aZ3WwOZ+ox3r6HrpWXDzKCg4f\n9OGq71xzsqAf2CGtSU00P2m+U+v+Vxs03L745J3sBaIp38kI3/8ianCdcaiOeyzs\n+1gdx3HUwdVix2meQjU0dtHdSuuwVbOhw4vy6VLSI4eYkTPiWFTOIgMaW8iUQecf\nTzfVbDLjAgMBAAECggEADgV3Kb5nBWrVXAhoEb1qGbmIZ8LVWbJWFDn7Lm33QrHc\n0CXIkN85GAceVM/+7ELaEIGftd55O/p5VwzbLy5be9Bb7W7tM81EQii7QbLV3cSA\nUquRqsVZj4MBnJqHCmb0WXqcEcnppF3hj0HhLEUG+Hm5gg68EfwuU0fVY49yZO8D\nzG9FRZQi2pRt3DV2tzZCuoUCRQg+W3kkU5CvAXuYB7QYBBy/FPog4S6zqcOud9vo\nsvkO9zdSr9rjIBwQSURy21cA+f4K1eaZd4pePQkymp3yZ8oNLowXTVYdKXhuws1e\nVilVUuZEU65D4pOo1sUveCRhK4WzDfEU9mwo8kly5QKBgQDVTIP/YJjEDcoZoh5l\nuaymmBTU2OLOO2KdOdnBUpL6WWcCNbwEejCVPiIInDpbGzkm6FOsdx0h0467Ntzo\n0b94cJoXONBK5PSHcFVeiqVtbupaHjtJhdb00C/KHzJyzYMZmjJHll+d0m80b8Y3\n3N3Dt8cOsifY5n6FW7fPZ9F2vQKBgQC5Z42KgIy4Di2/huqIxLygUZw049BDCdhG\nJ7bI44OAn76vkmmdF9h+Up4FVrfXs4Y/6xy7TdgDx9VNdhdHh9pDslCVQaQmK27f\n7IGTbsqrYr2uMNa1RpA52nVFxoFMT+RZG756IAD4wul4txF1qnTaqjZRTfpfSWWy\nTkqYHUg6HwKBgQCOGbyyjRsZOgqTSzMvGCTSk+0E5D0todiP4HOW3Lk4egkrKrtI\nzFLDirJHxDUIbzmDFzJvaqeI2pVzWhiQLvR9e57cq6fwzVmvRYJKStns7wDH6u4a\njETpsiy0XlZQr2OQ0e5/TMoEraYSbAjFPKqtcij2PHBZiy1tEO6DCao9jQKBgCAi\neZ7a3wj7tCQxHy9rYgIrgvaL0cn8x9aJBZ5WCLHffi5yIwoOWwCyEx97w0uImyky\n9/zi5iDpnufZIvnL6yG2o07rXKcc+g+nr2G9XzVLXPL3Fg+/Vjogyhi46iou4rYr\nH92M9H4pUkwQ9t69F5nazKVU7aNcVlsMRNOOp7kjAoGAEwVBa33O89Cq8qobU/Tx\nCqwrOZHJujnyhPv4lnkA0+itDrY2tej/3hszCkSPDdUSo3e5RJKvXQVWxeC2bUBF\nhV2Fcpf2WydclHi1BzTo1qU20yTxZTj2HLJ6dIrIlIllH0rrd0MVrUkVuANkNeCA\nJDJUzISQCFnZq4raKhl6WGY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "musicparty@starry-hearth-259220.iam.gserviceaccount.com",
+  "client_id": "111506930541142207006",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/musicparty%40starry-hearth-259220.iam.gserviceaccount.com"
+}
