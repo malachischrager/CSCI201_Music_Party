@@ -10,12 +10,13 @@
 		<div id="header">
 			<h1>Log In</h1>
 		</div>
+		<div id="error_msg"></div>
 		<div id="page">
           	
-          	<form action="HomeServlet" method="GET" class="container" id="join-room">
+          	<form onsubmit="return validate();" name="login" method="POST" class="container" id="join-room">
           	
           		<div class="row justify-content-center form-input">
-          			<input type="text" name="username" class="form-control col-4" placeholder="Username">
+          			<input type="text" name="user" class="form-control col-4" placeholder="Username">
           		</div>
           		<div class="row justify-content-center form-input">
           			<input type="password" name="password" class="form-control col-4" placeholder="Password">
@@ -26,4 +27,26 @@
           	</form>	
 	    </div>
 	</body>
+	<script>
+	
+		function validate() {
+			
+			console.log("in validate");
+			
+			var type;
+		    var xhttp = new XMLHttpRequest();
+		    xhttp.open("GET", "Verify?username=" + document.login.user.value + "&password=" + document.login.password.value + "&type=login", false);
+		    xhttp.send();
+		    if(xhttp.responseText.trim().length > 0) {
+			    document.getElementById("error_msg").innerHTML = xhttp.responseText;
+			    document.getElementById("error_msg").style.color = "red";
+			    return false;
+		    }
+		    sessionStorage.setItem("loggedIn", "1");
+		    sessionStorage.setItem("currUser", document.reg.user.value);
+		    return true;
+			
+			
+		}
+	</script>
 </html>

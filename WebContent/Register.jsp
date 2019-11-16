@@ -14,7 +14,7 @@
 		
 			<div id=error_mesg></div>
           	
-          	<form name="reg" onsubmit="return validate();" method="GET" class="container" id="join-room">
+          	<form name="reg" onsubmit="return validate();" method="POST" class="container" id="join-room">
           	
           		<div class="row justify-content-center form-input">
           			<input type="text" name="user" class="form-control col-4" placeholder="Username">
