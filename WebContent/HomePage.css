@@ -1,0 +1,29 @@
+body {
+   
+   background: LightSteelBlue !important;
+            	
+}
+
+#header {
+	margin-top: 5%;
+	text-align: center;
+	color: DarkBlue;
+}
+
+#login {
+	margin: 2%;
+	
+	
+}
+
+#register {
+	
+	margin: 2%;
+	
+}
+
+#join-room {
+	
+	text-align: center;
+	
+}
