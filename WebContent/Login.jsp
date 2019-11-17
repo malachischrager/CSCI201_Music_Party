@@ -13,7 +13,7 @@
 		<div id="error_msg"></div>
 		<div id="page">
           	
-          	<form action="" onsubmit="return validate();" name="login" method="POST" class="container" id="join-room">
+          	<form action="" onsubmit="return validate();" name="login" method="GET" class="container" id="join-room">
           	
           		<div class="row justify-content-center form-input">
           			<input type="text" name="user" class="form-control col-4" placeholder="Username">
@@ -34,17 +34,17 @@
 			console.log("in validate");
 			
 			var type;
-		    var xhttp = new XMLHttpRequest();
-		    xhttp.open("GET", "Verify?username=" + document.login.user.value + "&password=" + document.login.password.value + "&type=login", false);
-		    xhttp.send();
-		    if(xhttp.responseText.trim().length > 0) {
-			    document.getElementById("error_msg").innerHTML = xhttp.responseText;
-			    document.getElementById("error_msg").style.color = "red";
-			    return false;
-		    }
-		    sessionStorage.setItem("loggedIn", "1");
-		    sessionStorage.setItem("currUser", document.reg.user.value);
-		    return true;
+		Â Â Â Â var xhttp = new XMLHttpRequest();
+		Â Â Â Â xhttp.open("GET", "Verify?username=" + document.login.user.value + "&password=" + document.login.password.value + "&type=login", false);
+		Â Â Â Â xhttp.send();
+		Â Â Â Â if(xhttp.responseText.trim().length > 0) {
+			Â Â Â Â document.getElementById("error_msg").innerHTML = xhttp.responseText;
+			Â Â Â Â document.getElementById("error_msg").style.color = "red";
+			Â Â Â Â return false;
+		Â Â Â Â }
+		Â Â Â Â sessionStorage.setItem("loggedIn", "1");
+		Â Â Â Â sessionStorage.setItem("currUser", document.reg.user.value);
+		Â Â Â Â return true;
 			
 			
 		}
