@@ -1,26 +1,36 @@
 body {
    
    background: LightSteelBlue !important;
-            	
+      	
 }
 
 #header {
 	margin-top: 5%;
 	text-align: center;
 	color: DarkBlue;
+	
 }
 
+h1{
+	font-family: 'Bungee Shade', cursive !important;	
+	font-size: 50px !important;
+}
 
 .form-input {
 	
 	margin: 2%;
 	
 }
+
 #login {
 	
 	margin: 2%;
 	
-	
+}
+
+button{
+	font-family: 'Tomorrow', sans-serif !important;
+	font-size:20px !important;
 }
 
 #register {

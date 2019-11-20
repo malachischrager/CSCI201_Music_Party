@@ -7,6 +7,8 @@
 <title>Room</title>
 	<link rel="stylesheet" type="text/css" href="room.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Tomorrow&display=swap" rel="stylesheet">
 	
 </head>
 <body>
@@ -26,15 +28,15 @@
 	<% String artist3= "artist3"; %>
 	
 	<div id="header_row">
-		<div id="code" class="border-3 col-4 rounded">
+		<div id="code" class="border-3 col-3 rounded">
 			<h5>Room Code</h5>
 			<h5><%=code %></h5>
 		</div>
 		
 		
-		<h1 class="col-4"><%=username %>'s Room</h1>
+		<h1 class="col-6"><%=username %>'s Room</h1>
 		
-		<div id="view" class="col-4 border-3 rounded">
+		<div id="view" class="col-3 border-3 rounded">
 			<h5><%=person %> View</h5>
 		</div>
 	</div> 

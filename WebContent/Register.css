@@ -10,6 +10,10 @@ body {
 	color: DarkBlue;
 }
 
+h1{
+	font-family: 'Bungee Shade', cursive !important;	
+	font-size: 50px !important;
+}
 
 .form-input {
 	
@@ -20,7 +24,11 @@ body {
 	
 	margin: 2%;
 	
-	
+}
+
+button{
+	font-family: 'Tomorrow', sans-serif !important;
+	font-size:20px !important;
 }
 
 #register {

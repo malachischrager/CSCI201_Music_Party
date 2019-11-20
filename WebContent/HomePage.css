@@ -10,6 +10,16 @@ body {
 	color: DarkBlue;
 }
 
+h1{
+	font-family: 'Bungee Shade', cursive !important;	
+	font-size: 50px !important;
+}
+
+button{
+	font-family: 'Tomorrow', sans-serif !important;
+	font-size:20px !important;
+}
+
 #login {
 	margin: 2%;
 	
