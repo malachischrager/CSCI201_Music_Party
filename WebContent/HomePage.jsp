@@ -21,7 +21,7 @@
           		<button onclick="window.location.href = 'Register.jsp';" type="submit" class="btn btn-dark"> Register</button>
           	</div>
           	
-          	<form action="HomeServlet" method="GET" class="row justify-content-center" id="join-room">
+          	<form action="room_join.jsp" method="GET" class="row justify-content-center" id="join-room">
           	
           		<input type="text" name="join" class="form-control col-2" placeholder="Room ID" id="form-input">
             		

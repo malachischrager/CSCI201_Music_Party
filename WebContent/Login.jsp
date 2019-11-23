@@ -15,7 +15,7 @@
 		<div id="error_msg"></div>
 		<div id="page">
           	
-          	<form action="" onsubmit="return validate();" name="login" method="GET" class="container" id="join-room">
+          	<form action="join_start.jsp" onsubmit="return validate();" name="login" method="GET" class="container" id="join-room">
           	
           		<div class="row justify-content-center form-input">
           			<input type="text" name="user" class="form-control col-4" placeholder="Username">
