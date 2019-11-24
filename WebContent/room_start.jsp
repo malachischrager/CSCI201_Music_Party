@@ -105,7 +105,32 @@
  			</div>
 		</ol>
 	</div>
+	<script>
 	
+		function validate() {
+			
+			console.log("add song");
+			
+			var type;
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "ADD_SONG" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+			xhttp.send();
+			var allSongs = xhttp.responseText.trim();
+			String[] s = allSongs.split(",");
+			var element = document.getElementById("queue");
+			var list = "";
+			for(var i = 0; i < s.length; i++){
+				list +=	"<div class=\"row justify-content-center\">"+
+							"<div class=\"col-6\">"+
+							"<li>"+ s[i] +"</div>" + "<div class=\"score col-2\">" + 
+									"<div class=\"triangle-up\"></div><div class=\"count\"></div>" + 
+									"<div class=\"triangle-down\"></div>" + 
+								"</div>" + 
+			 				"</li></div>";
+			}
+			element.innerHTML = list;
+		}
+	</script>
 	
 </body>
 </html>
