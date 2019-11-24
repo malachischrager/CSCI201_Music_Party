@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,6 +36,7 @@ public class Verify extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		PrintWriter out = null;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
@@ -72,6 +74,16 @@ public class Verify extends HttpServlet {
 		}
 		out.println(error);
     	out.close();
+    	
+    	String next = "/join_start.jsp";
+    	RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
+    	try {
+    		dispatch.forward(request, response);
+    	}catch(IOException e) {
+    		e.printStackTrace();
+    	}catch(ServletException e) {
+    		e.printStackTrace();
+    	}
 	}
 	protected boolean userExists(String username) {
 		Connection conn = null;
@@ -79,7 +91,7 @@ public class Verify extends HttpServlet {
 		ResultSet rs = null;
 		boolean output = false;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty&password=musicparty");
+			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=musicparty&password=musicparty");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE username ='"+ username +"'");
 			if(!(rs.next())) {
