@@ -36,7 +36,6 @@ public class Verify extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter out = null;
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
@@ -50,12 +49,17 @@ public class Verify extends HttpServlet {
 			System.out.println(confirm);
 			if(password.equals(confirm)) {
 				System.out.println("passwords match");
-				if(!userExists(username)) {
-					System.out.println("reg");
-					reg(username, password);
-				} //check if the user exists in the database, if they do error, if not add to database
-				else {
-					error = "This username is already taken";
+				try {
+					if(!userExists(username)) {
+						System.out.println("reg");
+						reg(username, password);
+					} //check if the user exists in the database, if they do error, if not add to database
+					else {
+						error = "This username is already taken";
+					}
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 			else {
@@ -63,35 +67,35 @@ public class Verify extends HttpServlet {
 			}
 		}
 		else {
-			if(userExists(username)) {
-				if(!(login(username, password))) { //check to see if user exists in the database, if not error, if password wrong error
-					error = "Incorrect password.";
+			try {
+				if(userExists(username)) {
+					if(!(login(username, password))) { //check to see if user exists in the database, if not error, if password wrong error
+						error = "Incorrect password.";
+					}
+					//RequestDispatcher baddispatch = getServletContext().getRequestDispatcher("/join_start.jsp");
+					//baddispatch.forward(request, response);
+
+					
 				}
-			}
-			else {
-				error = "This user does not exist.";
+				else {
+					error = "This user does not exist.";
+				}
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		out.println(error);
     	out.close();
-    	
-    	String next = "/join_start.jsp";
-    	RequestDispatcher dispatch = getServletContext().getRequestDispatcher(next);
-    	try {
-    		dispatch.forward(request, response);
-    	}catch(IOException e) {
-    		e.printStackTrace();
-    	}catch(ServletException e) {
-    		e.printStackTrace();
-    	}
 	}
-	protected boolean userExists(String username) {
+	protected boolean userExists(String username) throws ClassNotFoundException {
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
 		boolean output = false;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=musicparty&password=musicparty");
+			//Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mysql://google/musicparty?cloudSqlInstance=starry-hearth-259220:us-central1:musicparty01&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=true&user=musicparty&password=musicparty");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM users WHERE username ='"+ username +"'");
 			if(!(rs.next())) {
