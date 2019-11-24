@@ -13,7 +13,7 @@
 </head>
 <body>
 	<% String username = "John"; %>
-	<% String code = "U45XYgJk"; %>
+	<% String code = request.getParameter("roomID"); %>
 	<% String person = "User"; %>
 	<% String song1= "song1"; %>
 	<% String song2= "song2"; %>
@@ -43,15 +43,17 @@
 	
 	<div class="clearfloat"></div>
 	<div id="form" class="mt-5 mb-5">
-		<form action="" method="">
+		<form action="addSongServlet" method="POST">
 			<div class="form-group row justify-content-center">
 				<div class="col-5">
-					<select name="sound_id" id="sound-id" class="form-control">
+					<select name="song-name" id="song-id" class="form-control">
 						<option value="" selected disabled>-- Add a Song --</option>
-						<option value=<%=song1 %>><%=song1 %></option>
-						<option value=<%=song2 %>><%=song2 %></option>
-						<option value=<%=song3 %>><%=song3 %></option>
+						<option value="1"><%=song1 %></option>
+						<option value="2"><%=song2 %></option>
+						<option value="3"><%=song3 %></option>
 					</select>
+					
+					<input type="hidden" name="username" value="<%=username%>">
 				</div>
 				<div class="col-2">
 					<button id="submit" type="submit" class="btn btn-primary">Submit</button>
