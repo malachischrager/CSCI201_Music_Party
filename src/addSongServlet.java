@@ -1,9 +1,11 @@
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -34,8 +36,9 @@ public class addSongServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String songName = request.getParameter("song-name");
-		
-		System.out.println(songName);
+		String username = request.getParameter("username");
+		System.out.println("song name is " +songName);
+		System.out.println("username is " + request.getParameter("username"));
 		
 		Connection conn = null;
 		Statement st = null;
@@ -50,7 +53,21 @@ public class addSongServlet extends HttpServlet {
 			ps.setString(1, request.getParameter("username"));
 			ps.setInt(2, Integer.parseInt(songName));
 			ps.executeUpdate();
+			
 			System.out.println("Added a song to the queue");
+			
+			String findSong = "SELECT songID FROM rooms where owner = ?";
+			PreparedStatement pre = conn.prepareStatement(findSong);
+			pre.setString(1, username);
+			ResultSet songResult = pre.executeQuery();
+			String answer = "";
+			while(songResult.next()) {
+				int songid = songResult.getInt(1);
+				answer += Integer.toString(songid)+"&";
+			}
+			PrintWriter out = response.getWriter();
+			out.println(answer);
+			out.close();
 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -67,6 +84,12 @@ public class addSongServlet extends HttpServlet {
 				System.out.println(sqle.getMessage());
 			}
 		}
+		
+		//find all of the songs from the database
+		//printwriter, 1&2
+		
+		
+		
 	}
 
 	/**
