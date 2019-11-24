@@ -26,7 +26,9 @@
 	<% String artist1= "artist1"; %>
 	<% String artist2= "artist2"; %>
 	<% String artist3= "artist3"; %>
-	
+	<script>
+		let songs = ["", "yellow", "the scientist", "bad guy"];
+	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
 			<h5>Room Code</h5>
@@ -43,7 +45,7 @@
 	
 	<div class="clearfloat"></div>
 	<div id="form" class="mt-5 mb-5">
-		<form action="addSongServlet" method="POST">
+		<form action="" method="">
 			<div class="form-group row justify-content-center">
 				<div class="col-5">
 					<select name="song-name" id="song-id" class="form-control">
@@ -53,17 +55,17 @@
 						<option value="3"><%=song3 %></option>
 					</select>
 					
-					<input type="hidden" name="username" value="<%=username%>">
+					<input type="hidden" id="username" name="username" value="<%=username%>">
 				</div>
 				<div class="col-2">
-					<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+					<button id="submit"  onclick = "return addSong()" type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</div> <!-- .form-group -->
 		</form>
 	</div> 
 	
 	<div id="queue">
-		<ol>
+		<ol id = "my-list">
 			<div class="row justify-content-center">
 				<div class="col-6">
 					<li>
@@ -108,6 +110,44 @@
 		</ol>
 	</div>
 	
+	<div id=response>
+	
+	</div>
+	<script>
+		function addSong(){
+			console.log("add song js");
+			
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("GET", "addSongServlet?username=" + document.querySelector("#username").value + "&song-name=" + document.querySelector("#song-id").value , false);
+			xhttp.send();
+			
+			var songsFromServlet = xhttp.responseText.trim();
+			console.log(songsFromServlet);
+			if(xhttp.responseText.trim().length > 0){
+				document.querySelector("#response").innerHTML = songsFromServlet;
+				var array = songsFromServlet.split("&");
+				console.log(array);
+				let orderedList = document.querySelector("#my-list");
+				while(orderedList.hasChildNodes()) {
+					orderedList.removeChild(orderedList.lastChild);
+				}
+				for(let i = 0; i < array.length; i++) {
+					if(array[i] == "") {
+						continue;
+					}
+					console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
+					let listItem = document.createElement("li");
+					listItem.innerHTML = songs[parseInt(array[i])];
+					orderedList.append(listItem);
+				}
+				document.querySelector("#response").innerHTML += array;
+				
+				return false;
+			}
+			
+			
+		}
+	</script>
 	
 </body>
 </html>
