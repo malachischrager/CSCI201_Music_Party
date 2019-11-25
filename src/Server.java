@@ -29,6 +29,9 @@ public class Server{
 	
 	public Server (){
 		System.out.print("Trying to connect to server...");
+		System.out.print("hi");
+		System.out.print("hi");
+		musicroom = new Vector<MusicRoom>();
 		try {
 			ServerSocket ss = new ServerSocket(6789);
 			System.out.print("Connected!\n");
@@ -50,6 +53,8 @@ public class Server{
 		String roomCode = input.get(1);
 		String username = input.get(2);
 		MusicRoom r = null;
+		System.out.println("addSong");
+		
 		for(int i = 0; i < musicroom.size(); i++) {
 			if(musicroom.get(i).getRoomName().equals(roomCode)) {
 				r = musicroom.get(i);
@@ -73,14 +78,28 @@ public class Server{
 		for(int i = 0; i < allSongs.size(); i++) {
 			output += allSongs.get(i) + ",";
 		}
+		System.out.println(output);
 		Vector<String> outputSongs = new Vector<String>();
 		outputSongs.add(output);
 		Vector<ServerThread> serverT = new Vector<ServerThread>();
+		serverT = r.allSt();
+		System.out.println("NEW SIZE IS " + serverT.size());
 		for(int i = 0; i < serverT.size(); i++) {
 			Message m = new Message("output", outputSongs);
 			st.sendMessage(m);
 		}
 	}
+	
+	public void addST(Vector<String>input, ServerThread st) {
+		String username = input.get(0);
+		MusicRoom r = musicroom.get(0); //JUST GOT THE 1ST ROOM, WOULD NEED CHANGING IF DONE A BETTER WAY
+		r.addUser(username, st);
+		Vector<ServerThread> serverT = new Vector<ServerThread>();
+		serverT = r.allSt();
+		System.out.println("NEW SIZE IS " + serverT.size());
+		return;
+	}
+	
 	public static void main(String [] args) {
 		Server cr = new Server();
 	}

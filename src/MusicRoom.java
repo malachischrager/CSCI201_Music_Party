@@ -5,8 +5,12 @@ public class MusicRoom {
 	Vector<String> users;
 	Vector<String> songNames;
  	String roomName;
+ 	
 	public MusicRoom(String roomName){
 		this.roomName = roomName;
+		users = new Vector<String>();
+		songNames = new Vector<String>();
+		serverThreads = new Vector<ServerThread>();
 	}
 	public void addUser(String username, ServerThread st) {
 		users.add(username);
@@ -32,5 +36,8 @@ public class MusicRoom {
 			}
 		}
 		return false;
+	}
+	public Vector<ServerThread> allSt(){
+		return serverThreads;
 	}
 }

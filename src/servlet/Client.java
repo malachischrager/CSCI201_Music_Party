@@ -53,6 +53,16 @@ public class Client {
 		
 	}
 	
+	public void addST(String username) {
+		Vector<String> input = new Vector<String>();
+		input.add(username);
+		Message m = new Message("ADD_ST", input);
+		
+		this.sendMessage(m);
+		
+		return;
+	}
+	
 	public void sendMessage(Message cm) {
 
 		try {
@@ -61,6 +71,14 @@ public class Client {
 		} catch (IOException ioe) {
 			System.out.println("ioe: " + ioe.getMessage());
 		}
+	}
+
+
+
+	public String getUpdate() throws ClassNotFoundException, IOException {
+		// TODO Auto-generated method stub
+		Message mr = (Message)ois.readObject();
+		return mr.getInput().get(0);
 	}
 }
 

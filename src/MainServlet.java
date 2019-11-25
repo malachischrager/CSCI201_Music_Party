@@ -41,6 +41,7 @@ public class MainServlet extends HttpServlet {
 		String roomCode = request.getParameter("playList");
 		PrintWriter out = response.getWriter();
 		String allSongs = null;
+		System.out.println("SERVICE");
 		if(pageName.contentEquals("start")) {
 			if(playlists.contains(roomCode)) { //playlist is there
 				if(null != people.get(username)){ //user is there
@@ -49,9 +50,9 @@ public class MainServlet extends HttpServlet {
 						
 						String songName = request.getParameter("songName");
 						Client c = people.get(username);
-						
+						System.out.println(songName);
 						try {
-							allSongs = c.addSong(roomCode, songName, username);
+							allSongs = c.addSong(songName,roomCode, username);
 						} catch (ClassNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -75,9 +76,9 @@ public class MainServlet extends HttpServlet {
 						
 						String songName = request.getParameter("songName");
 						Client c = people.get(username);
-						
+						System.out.println(songName);
 						try {
-							allSongs = c.addSong(roomCode, songName, username);
+							allSongs = c.addSong(songName, roomCode, username);
 						} catch (ClassNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -89,12 +90,98 @@ public class MainServlet extends HttpServlet {
 				}
 			}
 			else { //playlist is not there
+				System.out.println("playlist is not there");
 				playlists.add(roomCode); 
-			}
+					if(null != people.get(username)){ //user is there
+						System.out.println("else: user is there");
+						if(type.equals("ADD_SONG")) {
+							
+							String songName = request.getParameter("songName");
+							Client c = people.get(username);
+							System.out.println(songName);
+							try {
+								allSongs = c.addSong(songName,roomCode, username);
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+					}
+					else { //need to add user to playlist
+						System.out.println("else: need to add user to playlist");
+						Client nc = null;
+						try {
+							nc = new Client ("localhost", 6789);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						people.put(username, nc);
+						
+						if(type.equals("ADD_SONG")) {
+							
+							String songName = request.getParameter("songName");
+							Client c = people.get(username);
+							try {
+								allSongs = c.addSong(songName, roomCode, username);
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+						
+					}
 			
+				}
+			System.out.println("ALL SONGS " + allSongs);
+			out.println(allSongs);
+			out.close();
 		}
-		out.println(allSongs);
-		out.close();
+		else {
+			if(type.contentEquals("addST")) {
+				if(null != people.get(username)){ //user is there
+					
+						Client c = people.get(username);
+						c.addST(username);
+						
+					}
+					
+					else { //need to add user to playlist
+						
+						Client nc = null;
+						try {
+							nc = new Client ("localhost", 6789);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						people.put(username, nc);
+							
+							Client c = people.get(username);
+							c.addST(username);
+							
+						
+						
+					}
+				
+			}
+			if(type.contentEquals("UPDATE_SONG")) {
+				Client c = people.get(username);
+				String getUpdates = null;
+				try {
+					getUpdates = c.getUpdate();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				out.println(getUpdates);
+				out.close();
+			}
+		}
 		return;
 	}
 

@@ -11,7 +11,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Tomorrow&display=swap" rel="stylesheet">
 	
 </head>
-<body>
+<body onload = "addST()">
 	<% String username = "John"; %>
 	<% String code = request.getParameter("roomID"); %>
 	<% String person = "User"; %>
@@ -44,7 +44,7 @@
 	</div> 
 	
 	<div class="clearfloat"></div>
-	<div id="form" class="mt-5 mb-5">
+	<%-- <div id="form" class="mt-5 mb-5">
 		<form action="" method="">
 			<div class="form-group row justify-content-center">
 				<div class="col-5">
@@ -62,11 +62,11 @@
 				</div>
 			</div> <!-- .form-group -->
 		</form>
-	</div> 
+	</div>  --%>
 	
 	<div id="queue">
 		<ol id = "my-list">
-			<div class="row justify-content-center">
+			<%-- <div class="row justify-content-center">
 				<div class="col-6">
 					<li>
 						<%=song1 %> 
@@ -106,45 +106,50 @@
 							<div class="triangle-down"></div>
 						</div>
 	 				</li>
- 			</div>
+ 			</div> --%>
 		</ol>
 	</div>
 	
-	<div id=response>
+<!-- 	<div id=response>
 	
-	</div>
+	</div> -->
 	<script>
-		function addSong(){
-			console.log("add song js");
-			
+		function addST(){
 			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "addSongServlet?username=" + document.querySelector("#username").value + "&song-name=" + document.querySelector("#song-id").value , false);
+			xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "addST" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 			xhttp.send();
 			
-			var songsFromServlet = xhttp.responseText.trim();
-			console.log(songsFromServlet);
-			if(xhttp.responseText.trim().length > 0){
-				document.querySelector("#response").innerHTML = songsFromServlet;
-				var array = songsFromServlet.split("&");
-				console.log(array);
-				let orderedList = document.querySelector("#my-list");
-				while(orderedList.hasChildNodes()) {
-					orderedList.removeChild(orderedList.lastChild);
-				}
-				for(let i = 0; i < array.length; i++) {
-					if(array[i] == "") {
-						continue;
-					}
-					console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
-					let listItem = document.createElement("li");
-					listItem.innerHTML = songs[parseInt(array[i])];
-					orderedList.append(listItem);
-				}
-				document.querySelector("#response").innerHTML += array;
+		}
+		function addSong(){
+			while(true){
+				var type;
+				var xhttp = new XMLHttpRequest();
+				xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UPDATE_SONG" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
+				xhttp.send();
+				var allSongs = xhttp.responseText.trim();
 				
-				return false;
+				if(xhttp.responseText.trim().length > 0){
+					//document.querySelector("#response").innerHTML = songsFromServlet;
+					//var array = songsFromServlet.split("&");
+					var array = allSongs.split(",");
+					console.log(array);
+					let orderedList = document.querySelector("#my-list");
+					while(orderedList.hasChildNodes()) {
+						orderedList.removeChild(orderedList.lastChild);
+					}
+					for(let i = 0; i < array.length; i++) {
+						if(array[i] == "") {
+							continue;
+						}
+						console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
+						let listItem = document.createElement("li");
+						listItem.innerHTML = songs[parseInt(array[i])];
+						orderedList.append(listItem);
+					}
+					//document.querySelector("#response").innerHTML += array;
+					return false;
+				}
 			}
-			
 			
 		}
 	</script>

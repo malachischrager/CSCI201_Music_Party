@@ -13,7 +13,7 @@
 </head>
 <body>
 	<% String username = "John"; %>
-	<% String code = "U45XYgJk"; %>
+	<% String code = request.getParameter("roomID"); %>
 	<% String person = "User"; %>
 	<% String song1= "song1"; %>
 	<% String song2= "song2"; %>
@@ -27,6 +27,9 @@
 	<% String artist2= "artist2"; %>
 	<% String artist3= "artist3"; %>
 	
+	<script>
+		let songs = ["", "yellow", "the scientist", "bad guy"];
+	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
 			<h5>Room Code</h5>
@@ -46,22 +49,25 @@
 		<form action="" method="">
 			<div class="form-group row justify-content-center">
 				<div class="col-5">
-					<select name="sound_id" id="sound-id" class="form-control">
+					<select name="song-name" id="song-id" class="form-control">
 						<option value="" selected disabled>-- Add a Song --</option>
-						<option value=<%=song1 %>><%=song1 %></option>
-						<option value=<%=song2 %>><%=song2 %></option>
-						<option value=<%=song3 %>><%=song3 %></option>
+						<option value="1"><%=song1 %></option>
+						<option value="2"><%=song2 %></option>
+						<option value="3"><%=song3 %></option>
 					</select>
+					
+					<input type="hidden" id="username" name="username" value="<%=username%>">
 				</div>
 				<div class="col-2">
-					<button id="submit" type="submit" class="btn btn-primary">Submit</button>
+					<button id="submit"  onclick = "return addSong()" type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</div> <!-- .form-group -->
 		</form>
 	</div> 
 	
 	<div id="queue">
-		<ol>
+		<ol id = "my-list">
+		<%-- <ol>
 			<div class="row justify-content-center">
 				<div class="col-6">
 					<li>
@@ -102,34 +108,48 @@
 							<div class="triangle-down"></div>
 						</div>
 	 				</li>
- 			</div>
+ 			</div--%>
 		</ol>
 	</div>
 	<script>
-	
-		function validate() {
-			
-			console.log("add song");
-			
-			var type;
-			var xhttp = new XMLHttpRequest();
-			xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "ADD_SONG" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
-			xhttp.send();
-			var allSongs = xhttp.responseText.trim();
-			String[] s = allSongs.split(",");
-			var element = document.getElementById("queue");
-			var list = "";
-			for(var i = 0; i < s.length; i++){
-				list +=	"<div class=\"row justify-content-center\">"+
-							"<div class=\"col-6\">"+
-							"<li>"+ s[i] +"</div>" + "<div class=\"score col-2\">" + 
-									"<div class=\"triangle-up\"></div><div class=\"count\"></div>" + 
-									"<div class=\"triangle-down\"></div>" + 
-								"</div>" + 
-			 				"</li></div>";
+	function addSong(){
+		console.log("add song js");
+		
+		var type;
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "ADD_SONG" + "&pageName=start" + "&playList=" +  "U45XYgJk" + "&songName=" + document.querySelector("#song-id").value, false);
+		xhttp.send();
+		var allSongs = xhttp.responseText.trim();
+		
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "addSongServlet?username=" + document.querySelector("#username").value + "&song-name=" + document.querySelector("#song-id").value , false);
+		xhttp.send();
+		
+		var songsFromServlet = xhttp.responseText.trim();
+		console.log(songsFromServlet);
+		if(xhttp.responseText.trim().length > 0){
+			//document.querySelector("#response").innerHTML = songsFromServlet;
+			//var array = songsFromServlet.split("&");
+			var array = allSongs.split(",");
+			console.log(array);
+			let orderedList = document.querySelector("#my-list");
+			while(orderedList.hasChildNodes()) {
+				orderedList.removeChild(orderedList.lastChild);
 			}
-			element.innerHTML = list;
+			for(let i = 0; i < array.length; i++) {
+				if(array[i] == "") {
+					continue;
+				}
+				console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
+				let listItem = document.createElement("li");
+				listItem.innerHTML = songs[parseInt(array[i])];
+				orderedList.append(listItem);
+			}
+			//document.querySelector("#response").innerHTML += array;
+			return false;
 		}
+		
+	}
 	</script>
 	
 </body>
