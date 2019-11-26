@@ -41,7 +41,6 @@ public class MainServlet extends HttpServlet {
 		String roomCode = request.getParameter("playList");
 		PrintWriter out = response.getWriter();
 		String allSongs = null;
-		System.out.println("SERVICE");
 		if(pageName.contentEquals("start")) {
 			if(playlists.contains(roomCode)) { //playlist is there
 				if(null != people.get(username)){ //user is there

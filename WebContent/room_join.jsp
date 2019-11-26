@@ -120,14 +120,12 @@
 			xhttp.send();
 			
 		}
-		function addSong(){
-			while(true){
+		var con = setInterval(function(){
 				var type;
 				var xhttp = new XMLHttpRequest();
 				xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UPDATE_SONG" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 				xhttp.send();
 				var allSongs = xhttp.responseText.trim();
-				
 				if(xhttp.responseText.trim().length > 0){
 					//document.querySelector("#response").innerHTML = songsFromServlet;
 					//var array = songsFromServlet.split("&");
@@ -149,9 +147,7 @@
 					//document.querySelector("#response").innerHTML += array;
 					return false;
 				}
-			}
-			
-		}
+			}, 3000);
 	</script>
 	
 </body>

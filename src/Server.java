@@ -90,6 +90,19 @@ public class Server{
 		}
 	}
 	
+	public void updateSong(Vector<String> vector, ServerThread st) {
+		MusicRoom r = musicroom.get(0);
+		String output = "";
+		Vector<String> allSongs = r.getAllSongs();
+		for(int i = 0; i < allSongs.size(); i++) {
+			output += allSongs.get(i) + ",";
+		}
+		Vector<String> outputSongs = new Vector<String>();
+		outputSongs.add(output);
+		Message m = new Message("output", outputSongs);
+		st.sendMessage(m);
+	}
+	
 	public void addST(Vector<String>input, ServerThread st) {
 		String username = input.get(0);
 		MusicRoom r = musicroom.get(0); //JUST GOT THE 1ST ROOM, WOULD NEED CHANGING IF DONE A BETTER WAY
