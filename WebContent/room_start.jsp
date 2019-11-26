@@ -66,15 +66,15 @@
 	</div> 
 	
 	<div id="songaudio">
-		<audio controls>
+		<!-- <audio controls>
 			<source src="BadGuy.mp3" type="audio/mpeg">
-		</audio>
+		</audio> -->
 	</div>
 	
 	<div id="queue">
 		<ol id = "my-list">
 		
-			<div class="row justify-content-center">
+			<%-- <div class="row justify-content-center">
 				<div class="col-6">
 					<li>
 						<%=song1 %> 
@@ -88,7 +88,7 @@
 							<div class="triangle-down"></div>
 						</div>
 	 				</li>
- 			</div>
+ 			</div> --%>
  			<%-- 
  			<div class="row justify-content-center">
 				<div class="col-6">
@@ -154,15 +154,16 @@
 				orderedList.append(listItem);
 				
 				if(i == 0){
-					var audiodiv = document.querySelector("songaudio");
+					var audiodiv = document.querySelector("#songaudio");
 					var audioelement = document.createElement("audio");
-					var songmp3 = array[i]+".mp3";
+					var songmp3 = songs[array[i]]+".mp3";
 					
 					audioelement.controls = true;
-					audoelement.setAttribute("src", songmp3); 
+					audioelement.setAttribute("src", songmp3); 
+					
+					audiodiv.append(audioelement);
 				}
 			}
-			//document.querySelector("#response").innerHTML += array;
 			return false;
 		}
 		
