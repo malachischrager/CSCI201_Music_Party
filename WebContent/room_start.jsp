@@ -28,7 +28,7 @@
 	<% String artist3= "artist3"; %>
 	
 	<script>
-		let songs = ["", "yellow", "the scientist", "bad guy"];
+		let songs = ["", "EverydayLife", "OldFriends", "BadGuy"];
 	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
@@ -67,12 +67,16 @@
 	
 	<div id="queue">
 		<ol id = "my-list">
-		<%-- <ol>
+		
 			<div class="row justify-content-center">
-				<div class="col-6">
+				<div class="col-6 songaudio">
 					<li>
 						<%=song1 %> 
 						<%=artist1 %>
+						<audio controls>
+							<source src="BadGuy.mp3" type="audio/mpeg">
+						</audio>
+						
 				</div>
 						<div class="score col-2">
 							<div class="triangle-up"></div>
@@ -81,7 +85,7 @@
 						</div>
 	 				</li>
  			</div>
- 			
+ 			<%-- 
  			<div class="row justify-content-center">
 				<div class="col-6">
 					<li>
