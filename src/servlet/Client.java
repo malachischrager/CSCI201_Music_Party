@@ -1,4 +1,5 @@
 package servlet;
+
 import java.io.IOException;
 
 import java.io.ObjectInputStream;
@@ -63,6 +64,29 @@ public class Client {
 		return;
 	}
 	
+	
+	public String upVoteU(String song) throws ClassNotFoundException, IOException {
+		Vector<String> input = new Vector<String>();
+		input.add(song);
+		Message m = new Message("UP_VOTE", input);
+		
+		this.sendMessage(m);
+		
+		Message mr = (Message)ois.readObject();
+		
+		return mr.getInput().get(0);
+	}
+	
+	public void upVoteG(String song) throws ClassNotFoundException, IOException {
+		Vector<String> input = new Vector<String>();
+		input.add(song);
+		Message m = new Message("UP_VOTEG", input);
+		
+		this.sendMessage(m);
+		
+		return;
+	}
+	
 	public void sendMessage(Message cm) {
 
 		try {
@@ -77,14 +101,21 @@ public class Client {
 
 	public String getUpdate() throws ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		Vector<String> input = new Vector<String>();
-		String username = "";
-		input.add(username);
-		Message m = new Message("UPDATE_SONG", input);
-		this.sendMessage(m);
 		Message mr = (Message)ois.readObject();
 		return mr.getInput().get(0);
 	}
-}
 
+
+
+	public String getNum() throws ClassNotFoundException, IOException {
+		Vector<String> input = new Vector<String>();
+		Message m = new Message("GET_NUM", input);
+		
+		this.sendMessage(m);
+		
+		Message mr = (Message)ois.readObject();
+		
+		return mr.getInput().get(0);
+	}
+}
 
