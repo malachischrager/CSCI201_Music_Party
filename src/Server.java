@@ -124,6 +124,19 @@ public class Server{
 		return;
 	}
 	
+	public void updateSong(Vector<String> vector, ServerThread st) {
+		MusicRoom r = musicroom.get(0);
+		String output = "";
+		Vector<String> allSongs = r.getAllSongs();
+		for(int i = 0; i < allSongs.size(); i++) {
+			output += allSongs.get(i) + ",";
+		}
+		Vector<String> outputSongs = new Vector<String>();
+		outputSongs.add(output);
+		Message m = new Message("output", outputSongs);
+		st.sendMessage(m);
+	}
+	
 	public void getNum(Vector<String>input, ServerThread st) {
 		String output = ""; 
 		MusicRoom r = musicroom.get(0);
