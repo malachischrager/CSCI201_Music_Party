@@ -68,25 +68,18 @@ public class Client {
 	public String upVoteU(String song) throws ClassNotFoundException, IOException {
 		Vector<String> input = new Vector<String>();
 		input.add(song);
+		System.out.println("IN CLIENT BEFORE:" + song);
 		Message m = new Message("UP_VOTE", input);
 		
-		this.sendMessage(m);
+		this.sendMessage(m);	
 		
 		Message mr = (Message)ois.readObject();
 		
+		System.out.println("IN client VOTE " + mr.getInput().get(0));
+			
 		return mr.getInput().get(0);
 	}
-	
-	public void upVoteG(String song) throws ClassNotFoundException, IOException {
-		Vector<String> input = new Vector<String>();
-		input.add(song);
-		Message m = new Message("UP_VOTEG", input);
-		
-		this.sendMessage(m);
-		
-		return;
-	}
-	
+
 	public void sendMessage(Message cm) {
 
 		try {
@@ -112,15 +105,27 @@ public class Client {
 
 
 
-	public String getNum() throws ClassNotFoundException, IOException {
+	public String getNum(String username) throws ClassNotFoundException, IOException {
 		Vector<String> input = new Vector<String>();
+		input.add(username);
+		System.out.println("USER NAME IN CLIENT: " + username);
 		Message m = new Message("GET_NUM", input);
-		
 		this.sendMessage(m);
 		
 		Message mr = (Message)ois.readObject();
+		System.out.println("IN client " + mr.getInput().get(0));
+		return mr.getInput().get(0);
+	}
+	
+	public String getNumF(String username) throws ClassNotFoundException, IOException {
+		Vector<String> input = new Vector<String>();
+		input.add(username);
+		System.out.println("USER NAME IN CLIENT: " + username);
+		Message m = new Message("GET_NUMF", input);
+		this.sendMessage(m);
 		
+		Message mr = (Message)ois.readObject();
+		System.out.println("IN client NUMF " + mr.getInput().get(0));
 		return mr.getInput().get(0);
 	}
 }
-
