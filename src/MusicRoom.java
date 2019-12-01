@@ -37,10 +37,6 @@ public class MusicRoom {
 		map.put(song, 0);
 		System.out.println("MUSIC ROOM ADD SONG:");
 		map = sortByValue(map);
-		if (map.containsKey(song)) { 
-            Integer a = map.get(song); 
-            System.out.println(a);
-        } 
 		System.out.println("MUSIC ROOM ADD SONG after");
 		for (Entry<String, Integer> entry : map.entrySet())  {
             songNames.add(entry.getKey());
@@ -92,9 +88,18 @@ public class MusicRoom {
 		if (map.containsKey(name)) { 
             Integer a = map.get(name); 
             a += 1;
-            System.out.println(a);
             map.put(name, a);
         } 
+		System.out.println("UPVOTE MUSIC ROOM-----------");
+		map = sortByValue(map);
+		songNames.clear();
+		for (Entry<String, Integer> entry : map.entrySet())  {
+            songNames.add(entry.getKey());
+    	}
+		
+	}
+	public void upVoteF(String name) {
+		System.out.println("MUSIC ROOMF " + name);
 		map = sortByValue(map);
 		songNames.clear();
 		for (Entry<String, Integer> entry : map.entrySet())  {
