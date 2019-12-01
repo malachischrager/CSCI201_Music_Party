@@ -27,7 +27,12 @@
 	<% String artist2= "artist2"; %>
 	<% String artist3= "artist3"; %>
 	<script>
-		let songs = ["", "yellow", "the scientist", "bad guy"];
+		let songs = ["", "EverydayLife", "OldFriends", "BadGuy"];
+		
+	</script>
+	
+	<script>
+		let artists = ["", "Coldplay", "Coldplay", "Billie Eilish"];
 	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
@@ -115,6 +120,7 @@
 	</div> -->
 	<script>
 		function addST(){
+			console.log("hello");
 			var xhttp = new XMLHttpRequest();
 			xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "addST" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 			xhttp.send();
@@ -126,6 +132,7 @@
 				xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UPDATE_SONG" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 				xhttp.send();
 				var allSongs = xhttp.responseText.trim();
+				console.log(allSongs);
 				if(xhttp.responseText.trim().length > 0){
 					//document.querySelector("#response").innerHTML = songsFromServlet;
 					//var array = songsFromServlet.split("&");
@@ -135,14 +142,55 @@
 					while(orderedList.hasChildNodes()) {
 						orderedList.removeChild(orderedList.lastChild);
 					}
+					
+					var type;
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "GET_NUM" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+					xhttp.send();
+					var allNum = xhttp.responseText.trim();
+					var arrayNum = allNum.split(",");
+					console.log(arrayNum);
+					
 					for(let i = 0; i < array.length; i++) {
-						if(array[i] == "") {
+						/* if(array[i] == "") {
 							continue;
 						}
 						console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
 						let listItem = document.createElement("li");
 						listItem.innerHTML = songs[parseInt(array[i])];
+						orderedList.append(listItem); */
+						
+						if(array[i] == "") {
+							continue;
+						}
+						console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
+						let listItem = document.createElement("div");
+						listItem.setAttribute("class","row justify-content-center");
+						
+						let songdiv = document.createElement("div");
+						songdiv.setAttribute("class", "col-6 hi");
+						songdiv.innerHTML = songs[parseInt(array[i])];
+						songdiv.innerHTML += " by " + artists[parseInt(array[i])];
+						
+						let votediv = document.createElement("div");
+						votediv.setAttribute("class","score col-2");
+						
+						let triangle = document.createElement("div");
+						triangle.setAttribute("class","triangle-up");
+						
+						let count = document.createElement("div");
+						count.setAttribute("class", "count");
+						
+						count.innerHTML = arrayNum[i];
+						
+						votediv.append(triangle);
+						votediv.append(count); 
+					
+						listItem.append(songdiv);
+						listItem.append(votediv);
+						
 						orderedList.append(listItem);
+						
 					}
 					//document.querySelector("#response").innerHTML += array;
 					return false;
