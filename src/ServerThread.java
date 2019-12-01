@@ -51,7 +51,7 @@ public void sendMessage(Message m) {
 						server.addSong(m.getInput(), this);
 					}
 					if(m.getType().equals("UPDATE_SONG")) {
-						server.addSong(m.getInput(), this);
+						server.updateSong(m.getInput(), this);
 					}
 					if(m.getType().contentEquals("ADD_ST")) {
 						server.addST(m.getInput(), this);
