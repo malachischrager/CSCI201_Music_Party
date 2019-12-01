@@ -78,7 +78,7 @@ public class Server{
 		for(int i = 0; i < allSongs.size(); i++) {
 			output += allSongs.get(i) + ",";
 		}
-		System.out.println(output);
+		System.out.println("ADD SONG: " + output);
 		Vector<String> outputSongs = new Vector<String>();
 		outputSongs.add(output);
 		Vector<ServerThread> serverT = new Vector<ServerThread>();
@@ -105,6 +105,7 @@ public class Server{
 		String songName = input.get(0);
 		MusicRoom r = musicroom.get(0);
 		r.upVote(songName);
+		System.out.println("upVote in SERVER");
 		Vector<String> allSongs = r.getAllSongs();
 		for(int i = 0; i < allSongs.size(); i++) {
 			output += allSongs.get(i) + ",";
@@ -116,21 +117,32 @@ public class Server{
 		st.sendMessage(m);
 	}
 	
-	public void upVoteG(Vector<String>input, ServerThread st) {
+	public void upVoteF(Vector<String>input, ServerThread st) {
 		String output = "";
 		String songName = input.get(0);
 		MusicRoom r = musicroom.get(0);
-		r.upVote(songName);
-		return;
-	}
-	
-	public void updateSong(Vector<String> vector, ServerThread st) {
-		MusicRoom r = musicroom.get(0);
-		String output = "";
+		r.upVoteF(songName);
 		Vector<String> allSongs = r.getAllSongs();
 		for(int i = 0; i < allSongs.size(); i++) {
 			output += allSongs.get(i) + ",";
 		}
+		System.out.println("upVoteF: " + output);
+		Vector<String> outputSongs = new Vector<String>();
+		outputSongs.add(output);
+		Message m = new Message("output", outputSongs);
+		st.sendMessage(m);
+	}
+	
+	
+	public void updateSong(Vector<String> vector, ServerThread st) {
+		MusicRoom r = musicroom.get(0);
+		String output = "";
+		System.out.println("UPDATE SONG SERVER:");
+		Vector<String> allSongs = r.getAllSongs();
+		for(int i = 0; i < allSongs.size(); i++) {
+			output += allSongs.get(i) + ",";
+		}
+		System.out.println(output);
 		Vector<String> outputSongs = new Vector<String>();
 		outputSongs.add(output);
 		Message m = new Message("output", outputSongs);
@@ -140,9 +152,24 @@ public class Server{
 	public void getNum(Vector<String>input, ServerThread st) {
 		String output = ""; 
 		MusicRoom r = musicroom.get(0);
+		String username = input.get(0);
 		output = r.getNum();
 		Vector<String> outputSongs = new Vector<String>();
 		outputSongs.add(output);
+		System.out.println(username);
+		System.out.println("NUM : " + output);
+		Message m = new Message("output", outputSongs);
+		st.sendMessage(m);
+	}
+	
+	public void getNumF(Vector<String>input, ServerThread st) {
+		String output = ""; 
+		MusicRoom r = musicroom.get(0);
+		String username = input.get(0);
+		output = r.getNum();
+		Vector<String> outputSongs = new Vector<String>();
+		outputSongs.add(output);
+		System.out.println(username);
 		System.out.println("NUM : " + output);
 		Message m = new Message("output", outputSongs);
 		st.sendMessage(m);
