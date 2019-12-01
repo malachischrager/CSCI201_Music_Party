@@ -271,6 +271,7 @@ public class MainServlet extends HttpServlet {
 				
 			}
 			if(type.contentEquals("UPDATE_SONG")) {
+				System.out.println("IN SERVLET UPDATE SONG");
 				Client c = people.get(username);
 				String getUpdates = null;
 				try {
@@ -279,6 +280,7 @@ public class MainServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				System.out.println("getUpdates" + getUpdates);
 				out.println(getUpdates);
 				out.close();
 			}
@@ -290,6 +292,20 @@ public class MainServlet extends HttpServlet {
 				System.out.println(songName);
 				try {
 					c.upVoteG(songName);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			if(type.equals("UP_VOTE")) {
+				
+				String songName = request.getParameter("songName");
+				Client c = people.get(username);
+				System.out.println(songName);
+				try {
+					allSongs = c.upVoteU(songName);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
