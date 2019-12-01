@@ -34,6 +34,7 @@ public ServerThread(Socket s, Server server){
 }
 public void sendMessage(Message m) {
 	try {
+		System.out.println("sendMessST");
 		oos.writeObject(m);
 		oos.flush();
 	} catch (IOException ioe) {
@@ -43,16 +44,26 @@ public void sendMessage(Message m) {
 	public void run(){
 		try {
 			while(true) {
+				System.out.println("addSongST");
 				Message m = (Message) ois.readObject();
 				if (m != null) {
 					if(m.getType().equals("ADD_SONG")) {
 						server.addSong(m.getInput(), this);
 					}
 					if(m.getType().equals("UPDATE_SONG")) {
-						server.updateSong(m.getInput(), this);
+						server.addSong(m.getInput(), this);
 					}
 					if(m.getType().contentEquals("ADD_ST")) {
 						server.addST(m.getInput(), this);
+					}
+					if(m.getType().contentEquals("UP_VOTE")) {
+						server.upVote(m.getInput(), this);
+					}
+					if(m.getType().contentEquals("UP_VOTEG")) {
+						server.upVoteG(m.getInput(), this);
+					}
+					if(m.getType().contentEquals("GET_NUM")) {
+						server.getNum(m.getInput(), this);
 					}
 				}
 			}
