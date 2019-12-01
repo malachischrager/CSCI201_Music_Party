@@ -70,3 +70,7 @@ ol{
 	border-top: 20px solid #555;
 	display:inline-block;
 }
+
+#owner{
+	display:inline-block !important;
+}
