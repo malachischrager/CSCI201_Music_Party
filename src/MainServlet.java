@@ -7,11 +7,13 @@ import java.util.HashMap;
 import java.util.Vector;
 
 
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class MainServlet
  */
@@ -20,7 +22,6 @@ public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, Client> people = new HashMap<String, Client>();
 	private Vector<String> playlists = new Vector<String>();
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,13 +35,14 @@ public class MainServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		String pageName = request.getParameter("pageName");
 		String username = request.getParameter("username");
 		String type = request.getParameter("type");
 		String roomCode = request.getParameter("playList");
 		PrintWriter out = response.getWriter();
 		String allSongs = null;
+		System.out.println("SERVICE");
 		if(pageName.contentEquals("start")) {
 			if(playlists.contains(roomCode)) { //playlist is there
 				if(null != people.get(username)){ //user is there
@@ -52,6 +54,31 @@ public class MainServlet extends HttpServlet {
 						System.out.println(songName);
 						try {
 							allSongs = c.addSong(songName,roomCode, username);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+					if(type.equals("UP_VOTE")) {
+						
+						String songName = request.getParameter("songName");
+						Client c = people.get(username);
+						System.out.println(songName);
+						try {
+							allSongs = c.upVoteU(songName);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+					if(type.equals("GET_NUM")) {
+						Client c = people.get(username);
+						try {
+							allSongs = c.getNum();
 						} catch (ClassNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -85,6 +112,30 @@ public class MainServlet extends HttpServlet {
 						
 					}
 					
+					if(type.equals("UP_VOTE")) {
+						
+						String songName = request.getParameter("songName");
+						Client c = people.get(username);
+						System.out.println(songName);
+						try {
+							allSongs = c.upVoteU(songName);
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
+					
+					if(type.equals("GET_NUM")) {
+						Client c = people.get(username);
+						try {
+							allSongs = c.getNum();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+					}
 					
 				}
 			}
@@ -100,6 +151,32 @@ public class MainServlet extends HttpServlet {
 							System.out.println(songName);
 							try {
 								allSongs = c.addSong(songName,roomCode, username);
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+						
+						if(type.equals("UP_VOTE")) {
+							
+							String songName = request.getParameter("songName");
+							Client c = people.get(username);
+							System.out.println(songName);
+							try {
+								allSongs = c.upVoteU(songName);
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+						if(type.equals("GET_NUM")) {
+							Client c = people.get(username);
+							try {
+								allSongs = c.getNum();
 							} catch (ClassNotFoundException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -132,6 +209,31 @@ public class MainServlet extends HttpServlet {
 							
 						}
 						
+						
+						if(type.equals("UP_VOTE")) {
+							
+							String songName = request.getParameter("songName");
+							Client c = people.get(username);
+							System.out.println(songName);
+							try {
+								allSongs = c.upVoteU(songName);
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+						if(type.equals("GET_NUM")) {
+							Client c = people.get(username);
+							try {
+								allSongs = c.getNum();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
 						
 					}
 			
@@ -178,6 +280,32 @@ public class MainServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 				out.println(getUpdates);
+				out.close();
+			}
+			
+			if(type.equals("UP_VOTEG")) {
+				
+				String songName = request.getParameter("songName");
+				Client c = people.get(username);
+				System.out.println(songName);
+				try {
+					c.upVoteG(songName);
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+			if(type.equals("GET_NUM")) {
+				Client c = people.get(username);
+				try {
+					allSongs = c.getNum();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				out.println(allSongs);
 				out.close();
 			}
 		}
