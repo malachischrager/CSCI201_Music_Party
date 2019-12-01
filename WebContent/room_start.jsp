@@ -29,6 +29,11 @@
 	
 	<script>
 		let songs = ["", "EverydayLife", "OldFriends", "BadGuy"];
+		
+	</script>
+	
+	<script>
+		let artists = ["", "Coldplay", "Coldplay", "Billie Eilish"];
 	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
@@ -76,23 +81,22 @@
 		
 			<%-- <div class="row justify-content-center">
 				<div class="col-6">
-					<li>
+					<!-- <li> -->
 						<%=song1 %> 
 						<%=artist1 %>
-						
-						
 				</div>
-						<div class="score col-2">
-							<div class="triangle-up"></div>
-							<div class="count"><%=count1%></div>
-							<div class="triangle-down"></div>
-						</div>
-	 				</li>
- 			</div> --%>
- 			<%-- 
+				
+				<div class="score col-2">
+					<div class="triangle-up"></div>
+					<div class="count"><%=count2%></div>
+					<div class="triangle-down"></div>
+				</div> --%>
+<!-- 	 				</li>
+ --> 		<%-- </div>
+ 			
  			<div class="row justify-content-center">
 				<div class="col-6">
-					<li>
+					<!-- <li> -->
 						<%=song2 %> 
 						<%=artist2 %>
 				</div>
@@ -100,10 +104,10 @@
 							<div class="triangle-up"></div>
 							<div class="count"><%=count2%></div>
 							<div class="triangle-down"></div>
-						</div>
-	 				</li>
- 			</div>
-			
+						</div> --%>
+<!-- 	 				</li> -->
+  			<!-- </div> -->
+			<%-- 
 			<div class="row justify-content-center">
 				<div class="col-6">
 					<li>
@@ -141,16 +145,39 @@
 			var array = allSongs.split(",");
 			console.log(array);
 			let orderedList = document.querySelector("#my-list");
-			while(orderedList.hasChildNodes()) {
+			/* while(orderedList.hasChildNodes()) {
 				orderedList.removeChild(orderedList.lastChild);
-			}
-			for(let i = 0; i < array.length; i++) {
+			} */
+			for(let i = array.length-2; i < array.length; i++) {
 				if(array[i] == "") {
 					continue;
 				}
 				console.log("ADDING NEW ELEMENT WITH NAME: " + songs[array[i]]);
-				let listItem = document.createElement("li");
-				listItem.innerHTML = songs[parseInt(array[i])];
+				let listItem = document.createElement("div");
+				listItem.setAttribute("class","row justify-content-center");
+				
+				let songdiv = document.createElement("div");
+				songdiv.setAttribute("class", "col-6 hi");
+				songdiv.innerHTML = songs[parseInt(array[i])];
+				songdiv.innerHTML += " by " + artists[parseInt(array[i])];
+				
+				let votediv = document.createElement("div");
+				votediv.setAttribute("class","score col-2");
+				
+				let triangle = document.createElement("div");
+				triangle.setAttribute("class","triangle-up");
+				
+				let count = document.createElement("div");
+				count.setAttribute("class", "count");
+				
+				count.innerHTML = 0;
+				
+				votediv.append(triangle);
+				votediv.append(count); 
+			
+				listItem.append(songdiv);
+				listItem.append(votediv);
+				
 				orderedList.append(listItem);
 				
 				if(i == 0){
@@ -164,8 +191,70 @@
 					audiodiv.append(audioelement);
 				}
 			}
+			
+			let triangle = document.querySelectorAll(".triangle-up");
+			let count = document.querySelectorAll(".count");
+			
+			for(let j = 0; j < triangle.length; j++){
+				triangle[j].onclick = function(){	
+					let temp = parseInt(count[j].innerHTML);
+					let a = "hello";
+					let title0 = document.querySelectorAll(".hi");
+					console.log("check");
+					for(let w = 0; w < title0.length; w++){
+						//alert("1");
+						if(w == j){
+							console.log("worked");
+							a = title0[w].innerHTML;
+						}
+					}
+					console.log(a);
+					
+					let songName = a.split(" by ");
+					console.log(songName, " ", songName[0]);
+					
+					let idx = songs.indexOf(songName[0]);
+					console.log(idx);
+					
+					var type;
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "UP_VOTE" + "&pageName=start" + "&playList=" +  "U45XYgJk" + "&songName=" + idx, false);
+					xhttp.send();
+					var allSongs = xhttp.responseText.trim();
+					
+					var array = allSongs.split(",");
+					console.log(array);
+					let orderedList = document.querySelector("#my-list");
+					
+					let title = document.querySelectorAll(".hi");
+					for(let k = 0; k < title.length; k++){
+						title[k].innerHTML = songs[parseInt(array[k])];
+						title[k].innerHTML += " by " + artists[parseInt(array[k])];
+					}
+					
+					var type;
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "GET_NUM" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+					xhttp.send();
+					var allNum = xhttp.responseText.trim();
+					var array1 = allNum.split(",");
+					console.log(array1);
+					
+					let countNum = document.querySelectorAll(".count");
+					for(let p = 0; p < countNum.length; p++){
+						countNum[p].innerHTML = parseInt(array1[p]);
+					}
+					//count[j].innerHTML = temp + 1;
+				} 
+			}  
+		
+			
 			return false;
 		}
+		
+		
+		
+		
 		
 	}
 	</script>
