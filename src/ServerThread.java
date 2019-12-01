@@ -34,17 +34,26 @@ public ServerThread(Socket s, Server server){
 }
 public void sendMessage(Message m) {
 	try {
-		System.out.println("sendMessST");
+		System.out.println("IN SERVER THREAD: " + m.getInput().get(0));
 		oos.writeObject(m);
 		oos.flush();
 	} catch (IOException ioe) {
 		System.out.println("ioe: " + ioe.getMessage());
 	}
 }
+
+//public void sendMessageJoin(Message m) {
+//	try {
+//		System.out.println("IN SERVER THREAD: " + m.getInput().get(0));
+//		oos.writeObject(m);
+//		oos.flush();
+//	} catch (IOException ioe) {
+//		System.out.println("ioe: " + ioe.getMessage());
+//	}
+//}
 	public void run(){
 		try {
 			while(true) {
-				System.out.println("addSongST");
 				Message m = (Message) ois.readObject();
 				if (m != null) {
 					if(m.getType().equals("ADD_SONG")) {
@@ -59,10 +68,10 @@ public void sendMessage(Message m) {
 					if(m.getType().contentEquals("UP_VOTE")) {
 						server.upVote(m.getInput(), this);
 					}
-					if(m.getType().contentEquals("UP_VOTEG")) {
-						server.upVoteG(m.getInput(), this);
-					}
 					if(m.getType().contentEquals("GET_NUM")) {
+						server.getNum(m.getInput(), this);
+					}
+					if(m.getType().contentEquals("GET_NUMF")) {
 						server.getNum(m.getInput(), this);
 					}
 				}
