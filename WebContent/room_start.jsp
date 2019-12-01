@@ -221,22 +221,33 @@
 					console.log(songName, " ", songName[0]);
 					
 					let idx = songs.indexOf(songName[0]);
-					console.log(idx);
+					console.log("SONGNAME" + idx);
 					
 					var type;
 					var xhttp = new XMLHttpRequest();
 					xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "UP_VOTE" + "&pageName=start" + "&playList=" +  "U45XYgJk" + "&songName=" + idx, false);
 					xhttp.send();
-					var allSongs = xhttp.responseText.trim();
+					var allSongs1 = xhttp.responseText.trim();
 					
-					var array = allSongs.split(",");
-					console.log(array);
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "UPDATE_SONG" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+					xhttp.send();
+					var allSongs3 = xhttp.responseText.trim();
+					console.log("UPDATED SONGLIST3 " + allSongs3);
+					
+					var array8 = allSongs3.split(",");
+					//console.log("UPDATED SONGLIST2 " + array8);
+					
+					
 					let orderedList = document.querySelector("#my-list");
+					
+					//console.log("LENGTH " + array.length);
 					
 					let title = document.querySelectorAll(".hi");
 					for(let k = 0; k < title.length; k++){
-						title[k].innerHTML = songs[parseInt(array[k])];
-						title[k].innerHTML += " by " + artists[parseInt(array[k])];
+						console.log("ARRAY SONG " + array8[k]);
+						title[k].innerHTML = songs[parseInt(array8[k])];
+						title[k].innerHTML += " by " + artists[parseInt(array8[k])];
 					}
 					
 					var type;
@@ -245,11 +256,19 @@
 					xhttp.send();
 					var allNum = xhttp.responseText.trim();
 					var array1 = allNum.split(",");
-					console.log(array1);
+					console.log("allNum:" + array1);
+					
+					var type;
+					var xhttp = new XMLHttpRequest();
+					xhttp.open("GET", "MainServlet?username=" + "john" + "&type=" + "GET_NUMF" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+					xhttp.send();
+					var allNum1 = xhttp.responseText.trim();
+					var array2 = allNum1.split(",");
+					console.log("allNum2:" + array2);
 					
 					let countNum = document.querySelectorAll(".count");
 					for(let p = 0; p < countNum.length; p++){
-						countNum[p].innerHTML = parseInt(array1[p]);
+						countNum[p].innerHTML = parseInt(array2[p]);
 					}
 					//count[j].innerHTML = temp + 1;
 				} 
