@@ -21,6 +21,8 @@
 	          	<div class="col-1 offset-3">
 	        		<button type="submit" class="btn btn-dark" id="join-button">Join </button>
 	        	</div>
+	        	
+	        	<input type="hidden" name="username" id="name">
 	        </form>
 	        
 	        <form action="room_start.jsp" method="GET" class="row justify-content-center" id="join-room">
@@ -30,7 +32,21 @@
 	            <div class="col-1 offset-3">
 	           		<button type="submit" class="btn btn-dark" id="join-button">Start </button>
 	           	</div>
+	           	
 	        </form>
 	    </div>
 	</body>
+	
+	<script>		
+		let url = window.location.href;
+		
+		let idx = url.indexOf("user=");
+		let idx2 = url.indexOf("&"); 
+		
+		let name = url.substring(idx+5,idx2);
+		
+		/* document.querySelector("#name").value = name; */
+		sessionStorage.setItem("currUser", name);
+		
+	</script>
 </html>

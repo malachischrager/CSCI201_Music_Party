@@ -12,8 +12,8 @@
 	
 </head>
 <body>
-	<% String username = "John"; %>
-	<% String code = request.getParameter("roomID"); %>
+	<% String username = request.getParameter("username"); %>
+	<% String code = request.getParameter("join"); %>
 	<% String person = "User"; %>
 	<% String song1= "song1"; %>
 	<% String song2= "song2"; %>
@@ -42,7 +42,10 @@
 		</div>
 		
 		
-		<h1 class="col-6"><%=username %>'s Room</h1>
+		<%-- <h1 class="col-6"><%=username %>'s Room</h1> --%>
+		<h1 class="col-6">
+		<div id="owner"></div>
+		's Room</h1>
 		
 		<div id="view" class="col-3 border-3 rounded">
 			<h5><%=person %> View</h5>
@@ -124,6 +127,10 @@
 		</ol>
 	</div>
 	<script>
+	console.log(sessionStorage.getItem("currUser"));
+	
+	document.querySelector("#owner").innerHTML = sessionStorage.getItem("currUser");
+	
 	function addSong(){
 		console.log("add song js");
 		
