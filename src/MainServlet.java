@@ -1,5 +1,6 @@
 
 
+
 import servlet.Client;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +60,17 @@ public class MainServlet extends HttpServlet {
 						}
 						
 					}
-					
+					if(type.equals("REMOVE_SONG")) {
+						System.out.println("INSIDE OF MAINSERVER: ENTERED REMOVE_SONG OPTION");
+						String songName = request.getParameter("songName");
+						Client c = people.get(username);
+						System.out.println(songName + " is being removed from the queue");
+						try {
+							allSongs = c.removeSong(roomCode, username, songName);
+						} catch (ClassNotFoundException e) {
+							e.printStackTrace();
+						}
+					}
 					if(type.equals("UP_VOTE")) {
 						System.out.println("upVote in servlet");
 						String songName = request.getParameter("songName");
@@ -76,10 +87,10 @@ public class MainServlet extends HttpServlet {
 					
 					if(type.contentEquals("UPDATE_SONG")) {
 						Client c = people.get(username);
-						System.out.println("in update_song");
+						//System.out.println("in update_song");
 						try {
 							allSongs = c.getUpdate();
-							System.out.println(allSongs + " UPDATE OUTPUT");
+							//System.out.println(allSongs + " UPDATE OUTPUT");
 						} catch (ClassNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -87,7 +98,7 @@ public class MainServlet extends HttpServlet {
 					} 
 					
 					if(type.equals("GET_NUMF")) {
-						System.out.println("mainServlet getNum1");
+						//System.out.println("mainServlet getNum1");
 						Client c = people.get(username);
 						try {
 							allSongs = c.getNumF(username);
@@ -164,6 +175,18 @@ public class MainServlet extends HttpServlet {
 						
 					}
 					
+					if(type.contentEquals("UPDATE_SONG")) {
+						Client c = people.get(username);
+						//System.out.println("in update_song");
+						try {
+							allSongs = c.getUpdate();
+							//System.out.println(allSongs + " UPDATE OUTPUT");
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} 
+					
 				}
 			}
 			else { //playlist is not there
@@ -184,7 +207,6 @@ public class MainServlet extends HttpServlet {
 							}
 							
 						}
-						
 						
 						if(type.equals("UP_VOTE")) {
 							
@@ -209,6 +231,19 @@ public class MainServlet extends HttpServlet {
 								e.printStackTrace();
 							}
 							
+						}
+						if(type.contentEquals("UPDATE_SONG")) {
+							Client c = people.get(username);
+							String getUpdates = null;
+							try {
+								getUpdates = c.getUpdate();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							//System.out.println("getUpdates" + getUpdates);
+							out.println(getUpdates);
+							out.close();
 						}
 						
 					}
@@ -261,11 +296,24 @@ public class MainServlet extends HttpServlet {
 							}
 							
 						}
+						if(type.contentEquals("UPDATE_SONG")) {
+							Client c = people.get(username);
+							String getUpdates = null;
+							try {
+								getUpdates = c.getUpdate();
+							} catch (ClassNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							//System.out.println("getUpdates" + getUpdates);
+							out.println(getUpdates);
+							out.close();
+						}
 						
 					}
 			
 				}
-			System.out.println("ALL SONGS " + allSongs);
+			//System.out.println("ALL SONGS " + allSongs);
 			out.println(allSongs);
 			out.close();
 		}
@@ -309,7 +357,7 @@ public class MainServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("getUpdates" + getUpdates);
+				//System.out.println("getUpdates" + getUpdates);
 				out.println(getUpdates);
 				out.close();
 			}
