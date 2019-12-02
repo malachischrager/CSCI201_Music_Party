@@ -107,6 +107,31 @@ public class MusicRoom {
     	}
 		
 	}
+	
+	public void removeSong(String songname) {
+		System.out.println("REMOVING SONG INSIDE MUSICROOM");
+		System.out.println("SIZE BEFORE REMOVING: " + this.songNames.size());
+//		if(!songNames.isEmpty()) {
+//			System.out.println("Entered the isEmpty if statement");
+//			songNames.remove(0);
+//		}
+		for(int i = 0; i  < songNames.size(); i++) {
+			System.out.println(songNames.get(i));
+		}
+		System.out.println("MUSIC ROOM REMOVE NAME OF SONG: " + songname);
+		if (map.containsKey(songname)) { 
+			System.out.println("MUSIC ROOM SONG NAME FOUND");
+            map.remove(songname);
+        } 
+		map = sortByValue(map);
+		songNames.clear();
+		System.out.println("MAP SIZE IN MUSIC ROOM: " + map.size());
+		for (Entry<String, Integer> entry : map.entrySet())  {
+            songNames.add(entry.getKey());
+    	}
+		System.out.println("SIZE AFTER REMOVESONG FUNCTION: " + this.songNames.size());
+	}
+	
 	public String getNum() {
 		// TODO Auto-generated method stub
 		String output = "";
