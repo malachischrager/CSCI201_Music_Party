@@ -12,9 +12,9 @@
 	
 </head>
 <body onload = "addST()">
-	<% String username = "John"; %>
-	<% String code = request.getParameter("roomID"); %>
-	<% String person = "User"; %>
+	<% String username = "Bob"; %>
+	<% String code = "U45"; %>
+	<% String person = "Guest"; %>
 	<% String song1= "song1"; %>
 	<% String song2= "song2"; %>
 	<% String song3= "song3"; %>
@@ -27,12 +27,12 @@
 	<% String artist2= "artist2"; %>
 	<% String artist3= "artist3"; %>
 	<script>
-		let songs = ["", "EverydayLife", "OldFriends", "BadGuy"];
+		let songs = ["", "EverydayLife", "OldFriends", "BadGuy", "CryCryCry"];
 		
 	</script>
 	
 	<script>
-		let artists = ["", "Coldplay", "Coldplay", "Billie Eilish"];
+		let artists = ["", "Coldplay", "Coldplay", "Billie Eilish", "Coldplay"];
 	</script>
 	<div id="header_row">
 		<div id="code" class="border-3 col-3 rounded">
@@ -120,7 +120,6 @@
 	</div> -->
 	<script>
 		function addST(){
-			console.log("hello");
 			var xhttp = new XMLHttpRequest();
 			xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "addST" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 			xhttp.send();
@@ -132,7 +131,7 @@
 				xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UPDATE_SONG" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 				xhttp.send();
 				var allSongs = xhttp.responseText.trim();
-				console.log(allSongs);
+				console.log("INTERVAL :" + allSongs);
 				if(xhttp.responseText.trim().length > 0){
 					//document.querySelector("#response").innerHTML = songsFromServlet;
 					//var array = songsFromServlet.split("&");
@@ -145,7 +144,7 @@
 					
 					var type;
 					var xhttp = new XMLHttpRequest();
-					xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "GET_NUM" + "&pageName=start" + "&playList=" +  "U45XYgJk", false);
+					xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "GET_NUMF" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
 					xhttp.send();
 					var allNum = xhttp.responseText.trim();
 					var arrayNum = allNum.split(",");
@@ -193,6 +192,73 @@
 						
 					}
 					//document.querySelector("#response").innerHTML += array;
+					
+					let triangle = document.querySelectorAll(".triangle-up");
+			        let count = document.querySelectorAll(".count");
+					for(let j = 0; j < triangle.length; j++){
+						triangle[j].onclick = function(){	
+							let temp = parseInt(count[j].innerHTML);
+							let a = "hello";
+							let title0 = document.querySelectorAll(".hi");
+							console.log("check");
+							for(let w = 0; w < title0.length; w++){
+								//alert("1");
+								if(w == j){
+									console.log("worked");
+									a = title0[w].innerHTML;
+								}
+							}
+							console.log(a);
+							
+							let songName = a.split(" by ");
+							console.log(songName, " ", songName[0]);
+							
+							let idx = songs.indexOf(songName[0]);
+							console.log("SONGNAME" + idx);
+							
+							var type;
+							var xhttp = new XMLHttpRequest();
+							xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UP_VOTE" + "&pageName=join" + "&playList=" +  "U45XYgJk" + "&songName=" + idx, false);
+							xhttp.send();
+							var allSongs1 = xhttp.responseText.trim();
+							
+							var xhttp = new XMLHttpRequest();
+							xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "UPDATE_SONG" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
+							xhttp.send();
+							var allSongs3 = xhttp.responseText.trim();
+							console.log("UPDATED SONGLIST-JOIN " + allSongs3);
+							
+							var array8 = allSongs3.split(",");
+							//console.log("UPDATED SONGLIST2 " + array8);
+							
+							
+							let orderedList = document.querySelector("#my-list");
+							
+							//console.log("LENGTH " + array.length);
+							
+							let title = document.querySelectorAll(".hi");
+							for(let k = 0; k < title.length; k++){
+								console.log("ARRAY SONG " + array8[k]);
+								title[k].innerHTML = songs[parseInt(array8[k])];
+								title[k].innerHTML += " by " + artists[parseInt(array8[k])];
+							}
+							
+							
+							var type;
+							var xhttp = new XMLHttpRequest();
+							xhttp.open("GET", "MainServlet?username=" + "guest" + "&type=" + "GET_NUMF" + "&pageName=join" + "&playList=" +  "U45XYgJk", false);
+							xhttp.send();
+							var allNum1 = xhttp.responseText.trim();
+							var array2 = allNum1.split(",");
+							console.log("allNum2:" + array2);
+							
+							let countNum = document.querySelectorAll(".count");
+							for(let p = 0; p < countNum.length; p++){
+								countNum[p].innerHTML = parseInt(array2[p]);
+							}
+							//count[j].innerHTML = temp + 1;
+						} 
+					} 
 					return false;
 				}
 			}, 3000);
