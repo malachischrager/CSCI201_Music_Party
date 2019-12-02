@@ -34,7 +34,7 @@ public ServerThread(Socket s, Server server){
 }
 public void sendMessage(Message m) {
 	try {
-		System.out.println("IN SERVER THREAD: " + m.getInput().get(0));
+		//System.out.println("IN SERVER THREAD: " + m.getInput().get(0));
 		oos.writeObject(m);
 		oos.flush();
 	} catch (IOException ioe) {
@@ -61,6 +61,10 @@ public void sendMessage(Message m) {
 					}
 					if(m.getType().equals("UPDATE_SONG")) {
 						server.updateSong(m.getInput(), this);
+					}
+					if(m.getType().equals("REMOVE_SONG")) {
+						System.out.println("ENTERED SERVERTHREAD PART");
+						server.removeSong(m.getInput(), this);
 					}
 					if(m.getType().contentEquals("ADD_ST")) {
 						server.addST(m.getInput(), this);
